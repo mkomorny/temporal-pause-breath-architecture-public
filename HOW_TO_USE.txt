@@ -1,0 +1,56 @@
+HOW TO USE: temporal-pause-breath-architecture
+====================================
+
+PURPOSE
+  Model the time domain, pause histograms (ms), pause-to-speech ratio,
+  inhalation acoustics, intra-phrase velocity/acceleration, and nPVI rhythm metrics.
+
+CAPABILITIES
+  - Quantify pause duration histograms (micropause, syntactic, rhetorical ms)
+  - Compute total pause-to-speech ratio (%) and turn-latching constants
+  - Measure inhalation acoustics: duration (ms), relative SPL (dB), and spectral envelope
+  - Calculate normalized Pairwise Variability Index (nPVI) for stress- vs syllable-timing
+  - Model intra-phrase velocity curves and phrase-final syllable lengthening (1.2-1.8x)
+  - Detail acoustic formant targets and pitch stability of filled pauses ([ʌːm] vs [eː])
+  - Output machine-readable temporal_architecture.json
+
+USE CASES
+  - "Eliminate the robotic, evenly spaced cadence from this synthetic voice"
+  - You want to know exactly how long this speaker pauses for dramatic effect
+  - You want to inject audible, natural inhalation sounds before major declarations
+  - You need to calculate whether a speaker is stress-timed or syllable-timed
+
+IDEAS
+  - Use pause histograms to populate SSML `<break time="...ms"/>` tags
+  - Pair with non-speech-vocalization-library for breathing and pre-speech gestures
+  - Check nPVI score in clone-verification-match-score
+
+PROMPTS YOU CAN PASTE
+  /temporal-breath-profile Queens-male-orator
+
+  temporal architecture of this speaker
+
+  pause and breath profile for Steve Jobs
+
+  speech timing analysis of this audio clip. Give me pause histogram and nPVI.
+
+  How does this speaker accelerate within a phrase, and where do they inhale?
+
+EXAMPLE FLOW
+  You:   /temporal-breath-profile Queens-male-orator
+  Model: 1. Speaking Rate:
+         - 145 WPM, 4.6 syllables/second phonated
+         2. Pause Histogram:
+         - Micropauses: 110ms, Syntactic: 420ms, Rhetorical: 1450ms (max 2400ms)
+         - Pause-to-speech ratio: 22.4%
+         3. Inhalation Acoustics:
+         - Duration: 480ms, Relative SPL: -16.5 dB, CoG: 2100 Hz
+         4. Rhythm (nPVI):
+         - nPVI score 58.6 (pronounced stress-timing)
+         [temporal_architecture.json]
+
+DEFAULT GOALS IF YOU DON'T NAME ONE
+  1. Speaking rate (WPM and articulation SPS)
+  2. Pause distribution histogram and pause-to-speech ratio
+  3. Inhalation duration, intensity, and spectral center
+  4. Machine-readable temporal_architecture.json block
